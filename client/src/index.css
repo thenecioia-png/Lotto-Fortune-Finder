@@ -6,8 +6,8 @@
   html {
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
-    /* Forzar que el navegador nunca haga zoom-out */
     width: 100%;
+    font-size: 18px; /* base global — 1rem = 18px */
   }
 
   * {
@@ -255,3 +255,66 @@
 .bg-gold-900\/10 { background-color: rgba(66, 42, 4, 0.3) !important; }
 .bg-gold-900\/20 { background-color: rgba(66, 42, 4, 0.35) !important; }
 .bg-gold-900\/30 { background-color: rgba(66, 42, 4, 0.42) !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   ESCALA MÓVIL — font-size base 20px en pantallas ≤ 768px
+   Todo lo que use rem se escala automáticamente.
+   Los !important solo se aplican en móvil.
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  html { font-size: 20px !important; } /* 1rem = 20px en móvil */
+
+  /* ── Navbar ── */
+  nav a { font-size: 16px !important; }
+
+  /* ── Títulos ── */
+  h1 { font-size: 2.2rem !important; }
+  h2 { font-size: 1.8rem !important; }
+  h3 { font-size: 1.35rem !important; }
+
+  /* ── Texto general ── */
+  p, span, li, label, td, th { font-size: 1.05rem !important; }
+
+  /* Excepciones: elementos decorativos pequeños que no deben escalar */
+  .text-xs,
+  [class*="tracking-widest"],
+  nav span[class*="tracking"] { font-size: 0.7rem !important; }
+
+  /* ── Cards de lotería ── */
+  .lottery-card { padding: 20px !important; width: 100% !important; }
+
+  /* ── Bolas de números ── */
+  .number-ball {
+    width: 70px !important;
+    height: 70px !important;
+    font-size: 1.3rem !important;
+  }
+
+  /* ── Botones ── */
+  .btn-gold, .btn-outline-gold {
+    font-size: 1rem !important;
+    padding: 14px 22px !important;
+    min-height: 52px !important;
+  }
+
+  /* Botones de icono (hamburger, send, etc.) — no les damos padding extra */
+  button:not(.btn-gold):not(.btn-outline-gold) {
+    font-size: 1rem !important;
+    min-height: 48px !important;
+  }
+
+  /* ── Inputs y textareas ── */
+  input, textarea, .input-dark {
+    font-size: 1rem !important;
+    padding: 14px 16px !important;
+    min-height: 52px !important;
+  }
+
+  /* ── Chat — mensajes ── */
+  .chat-message,
+  [class*="rounded-2xl"] p,
+  [class*="rounded-2xl"] { font-size: 1rem !important; }
+
+  /* ── Símbolos de sueños ── */
+  .text-xl, .text-2xl { font-size: 2rem !important; }
+}
