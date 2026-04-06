@@ -9,35 +9,90 @@ function LotteryScheduleCard({ lottery }: { lottery: Lottery }) {
   const todayDraws = lottery.schedule.filter(s => s.day === TODAY_DAY);
 
   return (
-    <div className="lottery-card">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: lottery.color }} />
-        <h3 className="font-cinzel font-semibold text-gold-300 text-base sm:text-lg">{lottery.name}</h3>
+    <div style={{
+      background: 'linear-gradient(145deg, rgba(30,20,5,0.97), rgba(18,12,2,0.99))',
+      border: '1px solid rgba(196,146,10,0.50)',
+      borderRadius: '14px',
+      padding: '20px',
+      width: '100%',
+    }}>
+      {/* Header de la lotería */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+        <div style={{
+          width: '13px', height: '13px', borderRadius: '50%', flexShrink: 0,
+          backgroundColor: lottery.color,
+          boxShadow: `0 0 8px ${lottery.color}88`,
+        }} />
+        <h3 style={{
+          fontFamily: "'Cinzel', serif",
+          fontSize: '22px',
+          fontWeight: 700,
+          color: '#ffffff',
+          margin: 0,
+          lineHeight: 1.2,
+          flex: 1,
+        }}>
+          {lottery.name}
+        </h3>
         {todayDraws.length > 0 && (
-          <span className="ml-auto text-xs text-gold-400 bg-gold-400/10 border border-gold-400/30 px-2 py-0.5 rounded-full animate-pulse">
+          <span style={{
+            fontSize: '11px',
+            fontWeight: 700,
+            color: '#c4920a',
+            background: 'rgba(196,146,10,0.15)',
+            border: '1px solid rgba(196,146,10,0.4)',
+            borderRadius: '20px',
+            padding: '3px 10px',
+            animation: 'pulse 2s infinite',
+            flexShrink: 0,
+          }}>
             HOY
           </span>
         )}
       </div>
 
-      <div className="space-y-1.5">
+      {/* Filas de horarios */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
         {DAYS_ORDER.map(day => {
           const draws = lottery.schedule.filter(s => s.day === day);
           if (draws.length === 0) return null;
+          const isToday = day === TODAY_DAY;
           return (
-            <div key={day} className={`flex items-center justify-between py-1.5 px-2.5 rounded-lg
-              ${day === TODAY_DAY ? 'bg-gold-400/10 border border-gold-400/20' : 'bg-black/20'}`}>
-              <div className="flex items-center gap-1.5">
-                <Calendar className="w-3 h-3 text-gold-600/60 flex-shrink-0" />
-                <span className={`text-xs sm:text-sm ${day === TODAY_DAY ? 'text-gold-300 font-semibold' : 'text-gold-200/60'}`}>
+            <div key={day} style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '14px 14px',
+              borderRadius: '10px',
+              background: isToday ? 'rgba(196,146,10,0.12)' : 'rgba(0,0,0,0.25)',
+              border: isToday ? '1px solid rgba(196,146,10,0.35)' : '1px solid rgba(196,146,10,0.08)',
+            }}>
+              {/* Día */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Calendar size={14} color={isToday ? '#c4920a' : 'rgba(196,146,10,0.5)'} />
+                <span style={{
+                  fontSize: '18px',
+                  fontWeight: isToday ? 700 : 500,
+                  color: isToday ? '#FFD700' : 'rgba(232,204,120,0.80)',
+                  lineHeight: 1,
+                }}>
                   {day}
                 </span>
               </div>
-              <div className="flex flex-wrap gap-2 justify-end">
+
+              {/* Horarios */}
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                 {draws.map((d, i) => (
-                  <div key={i} className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-gold-600/60" />
-                    <span className="text-gold-400 text-xs font-medium">{d.time}</span>
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <Clock size={14} color={isToday ? '#FFD700' : 'rgba(196,146,10,0.6)'} />
+                    <span style={{
+                      fontSize: '18px',
+                      fontWeight: 600,
+                      color: isToday ? '#ffffff' : 'rgba(232,204,120,0.85)',
+                      lineHeight: 1,
+                    }}>
+                      {d.time}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -56,30 +111,45 @@ export default function Schedule() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-12">
-      <div className="text-center mb-8 sm:mb-12">
-        <div className="inline-flex items-center gap-2 text-gold-400/70 text-xs mb-3 tracking-widest uppercase">
-          <Star className="w-3 h-3" />
+    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '28px 16px 32px' }}>
+      {/* Header */}
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#c4920a', fontSize: '11px', marginBottom: '12px', letterSpacing: '3px', textTransform: 'uppercase', opacity: 0.85 }}>
+          <Star size={11} />
           <span>Calendario de Sorteos</span>
-          <Star className="w-3 h-3" />
+          <Star size={11} />
         </div>
-        <h1 className="font-cinzel text-2xl sm:text-4xl font-bold gold-text mb-2">Horarios de Loterías</h1>
-        <p className="text-gold-400/50 text-sm max-w-xl mx-auto">
+        <h1 className="font-cinzel gold-text" style={{ fontSize: 'clamp(24px, 7vw, 40px)', fontWeight: 800, margin: '0 0 8px', lineHeight: 1.1 }}>
+          Horarios de Loterías
+        </h1>
+        <p style={{ color: 'rgba(196,146,10,0.80)', fontSize: '14px', margin: '0 0 14px' }}>
           Todos los sorteos de la República Dominicana.
         </p>
-        <div className="mt-3 inline-flex items-center gap-2 bg-gold-400/10 border border-gold-400/20 rounded-full px-4 py-1.5">
-          <div className="w-2 h-2 rounded-full bg-gold-400 animate-pulse" />
-          <span className="text-gold-300 text-xs font-medium">Hoy: {TODAY_DAY}</span>
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: '8px',
+          background: 'rgba(196,146,10,0.12)', border: '1px solid rgba(196,146,10,0.35)',
+          borderRadius: '20px', padding: '6px 16px',
+        }}>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#c4920a', animation: 'pulse 2s infinite' }} />
+          <span style={{ color: '#e8cc78', fontSize: '13px', fontWeight: 600 }}>Hoy: {TODAY_DAY}</span>
         </div>
       </div>
 
+      {/* Cards */}
       {isLoading ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {[...Array(6)].map((_, i) => <div key={i} className="lottery-card animate-pulse h-48" />)}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="animate-pulse" style={{
+              height: '200px', borderRadius: '14px',
+              background: 'rgba(30,20,5,0.6)', border: '1px solid rgba(196,146,10,0.2)',
+            }} />
+          ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {data?.draws.map(lottery => <LotteryScheduleCard key={lottery.id} lottery={lottery} />)}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {data?.draws.map(lottery => (
+            <LotteryScheduleCard key={lottery.id} lottery={lottery} />
+          ))}
         </div>
       )}
     </div>

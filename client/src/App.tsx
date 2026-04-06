@@ -13,9 +13,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <div className="min-h-screen stars-bg">
+        {/* Sin min-h-screen aquí — cada página gestiona su propia altura */}
+        <div className="stars-bg" style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
           <Navbar />
-          <main className="pt-16">
+          {/* pt-16 = 64px para compensar el navbar fixed */}
+          <main style={{ paddingTop: '64px', flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/sorteos" element={<Schedule />} />

@@ -29,7 +29,7 @@ export default function Dreams() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-3 sm:px-6 py-8 sm:py-12">
+    <div className="max-w-2xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center gap-2 text-gold-400/70 text-xs mb-3 tracking-widest uppercase">

@@ -2,24 +2,61 @@ import { useQuery } from '@tanstack/react-query';
 import { Sparkles, Star, RefreshCw, TrendingUp } from 'lucide-react';
 import { api, LuckyNumbers } from '../api';
 
-function NumberBall({ n }: { n: string }) {
-  return <div className="number-ball">{n}</div>;
-}
-
 function LotteryCard({ item }: { item: LuckyNumbers }) {
   return (
-    <div className="lottery-card">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
-          <h3 className="font-cinzel text-sm sm:text-base font-semibold text-gold-300 truncate">
+    <div style={{
+      background: 'linear-gradient(145deg, rgba(30,20,5,0.97), rgba(18,12,2,0.99))',
+      border: '1px solid rgba(196,146,10,0.50)',
+      borderRadius: '14px',
+      padding: '20px 24px',
+      width: '100%',
+    }}>
+      {/* Header de la card */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+          <div style={{
+            width: '12px', height: '12px', borderRadius: '50%', flexShrink: 0,
+            backgroundColor: item.color,
+            boxShadow: `0 0 8px ${item.color}88`,
+          }} />
+          <h3 style={{
+            fontFamily: "'Cinzel', serif",
+            fontSize: '20px',
+            fontWeight: 700,
+            color: '#ffffff',
+            margin: 0,
+            lineHeight: 1.2,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}>
             {item.lotteryName}
           </h3>
         </div>
-        <TrendingUp className="w-4 h-4 text-gold-400 flex-shrink-0 ml-2 opacity-70" />
+        <TrendingUp size={18} color="#c4920a" style={{ flexShrink: 0, marginLeft: '8px', opacity: 0.8 }} />
       </div>
-      <div className="flex gap-2 sm:gap-3 justify-center flex-wrap">
-        {item.numbers.map((n, i) => <NumberBall key={i} n={n} />)}
+
+      {/* Bolas de números */}
+      <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        {item.numbers.map((n, i) => (
+          <div key={i} style={{
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            background: 'linear-gradient(145deg, #7a5008, #c4920a, #e0b030)',
+            color: '#0d0d0d',
+            fontFamily: "'Cinzel', serif",
+            fontWeight: 800,
+            fontSize: '22px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            boxShadow: '0 4px 16px rgba(196,146,10,0.55), inset 0 1px 0 rgba(255,255,255,0.25)',
+          }}>
+            {n}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -36,49 +73,57 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen">
-      {/* Hero — compacto en móvil */}
-      <section className="px-4 pt-8 pb-6 text-center">
-        <div className="inline-flex items-center gap-2 text-gold-400 text-xs mb-3 tracking-widest uppercase opacity-80">
-          <Star className="w-3 h-3" />
+    <div>
+      {/* Hero compacto */}
+      <section style={{ padding: '28px 16px 20px', textAlign: 'center' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#c4920a', fontSize: '11px', marginBottom: '12px', letterSpacing: '3px', textTransform: 'uppercase', opacity: 0.85 }}>
+          <Star size={11} />
           <span>República Dominicana</span>
-          <Star className="w-3 h-3" />
+          <Star size={11} />
         </div>
-        <h1 className="font-cinzel text-3xl sm:text-5xl md:text-7xl font-bold gold-text mb-2 leading-tight">
+        <h1 className="font-cinzel gold-text" style={{ fontSize: 'clamp(28px, 8vw, 72px)', fontWeight: 800, margin: '0 0 6px', lineHeight: 1.1 }}>
           AURUM<br />
-          <span className="text-xl sm:text-3xl md:text-5xl font-normal">NÚMEROS</span>
+          <span style={{ fontSize: 'clamp(18px, 5vw, 48px)', fontWeight: 400 }}>NÚMEROS</span>
         </h1>
-        <p className="text-gold-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-1 opacity-80">
+        <p style={{ color: 'rgba(232,204,120,0.82)', fontSize: '14px', maxWidth: '480px', margin: '0 auto 4px', lineHeight: 1.5 }}>
           Tu portal de numerología y suerte para las loterías dominicanas
         </p>
-        <p className="text-gold-400 text-xs capitalize opacity-65">{today}</p>
+        <p style={{ color: 'rgba(196,146,10,0.65)', fontSize: '12px', textTransform: 'capitalize' }}>{today}</p>
       </section>
 
-      {/* Números de la suerte */}
-      <section className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="flex items-center justify-between mb-5">
+      {/* Sección principal */}
+      <section style={{ maxWidth: '900px', margin: '0 auto', padding: '0 16px 32px' }}>
+        {/* Encabezado con botón */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
           <div>
-            <h2 className="font-cinzel text-lg sm:text-2xl font-semibold gold-text">Números de la Suerte</h2>
-            <p className="text-gold-400 text-xs mt-0.5 opacity-75">Actualizados diariamente</p>
+            <h2 className="font-cinzel gold-text" style={{ fontSize: 'clamp(18px, 5vw, 28px)', fontWeight: 700, margin: '0 0 2px' }}>
+              Números de la Suerte
+            </h2>
+            <p style={{ color: 'rgba(196,146,10,0.75)', fontSize: '12px', margin: 0 }}>Actualizados diariamente</p>
           </div>
           <button
             onClick={() => refetch()}
             disabled={isRefetching}
-            className="btn-outline-gold flex items-center gap-1.5 text-sm py-2 px-3"
+            className="btn-outline-gold"
+            style={{ padding: '8px 14px', fontSize: '13px', gap: '6px', display: 'flex', alignItems: 'center' }}
           >
-            <RefreshCw className={`w-4 h-4 ${isRefetching ? 'animate-spin' : ''}`} />
+            <RefreshCw size={15} className={isRefetching ? 'animate-spin' : ''} />
             <span className="hidden sm:inline">Actualizar</span>
           </button>
         </div>
 
+        {/* Grid — 1 col en móvil, 2 en tablet, 3 en desktop */}
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="lottery-card animate-pulse" style={{ height: '110px' }} />
+              <div key={i} className="animate-pulse" style={{
+                height: '120px', borderRadius: '14px',
+                background: 'rgba(30,20,5,0.6)', border: '1px solid rgba(196,146,10,0.2)',
+              }} />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
+          <div className="lottery-grid">
             {data?.luckyNumbers.map(item => (
               <LotteryCard key={item.lotteryId} item={item} />
             ))}
@@ -86,18 +131,25 @@ export default function Home() {
         )}
 
         {/* CTA */}
-        <div className="mt-10 card-dark rounded-2xl p-6 sm:p-10 text-center">
-          <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-gold-400 mx-auto mb-4 animate-float" />
-          <h2 className="font-cinzel text-xl sm:text-3xl font-bold gold-text mb-3">
+        <div style={{
+          marginTop: '32px',
+          background: 'linear-gradient(145deg, rgba(30,20,5,0.95), rgba(15,11,2,0.98))',
+          border: '1px solid rgba(196,146,10,0.45)',
+          borderRadius: '16px',
+          padding: '32px 24px',
+          textAlign: 'center',
+        }}>
+          <Sparkles size={40} color="#c4920a" style={{ margin: '0 auto 16px', display: 'block' }} className="animate-float" />
+          <h2 className="font-cinzel gold-text" style={{ fontSize: 'clamp(18px, 5vw, 28px)', fontWeight: 700, margin: '0 0 10px' }}>
             El Universo Habla a Través de los Números
           </h2>
-          <p className="text-gold-200 text-sm max-w-xl mx-auto mb-6 leading-relaxed opacity-80">
+          <p style={{ color: 'rgba(232,204,120,0.82)', fontSize: '14px', maxWidth: '480px', margin: '0 auto 24px', lineHeight: 1.6 }}>
             Descubre el significado oculto de tus sueños, consulta nuestros sorteos
             y chatea con Aurum IA, tu asistente numerológico.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="/suenos" className="btn-gold text-base text-center">Interpretar Sueño</a>
-            <a href="/chat" className="btn-outline-gold text-base text-center">Hablar con Aurum IA</a>
+          <div className="flex-col-sm-row">
+            <a href="/suenos" className="btn-gold" style={{ fontSize: '15px' }}>Interpretar Sueño</a>
+            <a href="/chat" className="btn-outline-gold" style={{ fontSize: '15px' }}>Hablar con Aurum IA</a>
           </div>
         </div>
       </section>
