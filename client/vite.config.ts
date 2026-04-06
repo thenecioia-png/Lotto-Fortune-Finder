@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'icon-192.svg', 'icon-512.svg'],
+      includeAssets: ['favicon.svg', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'],
       manifest: {
         name: 'Aurum Números',
         short_name: 'Aurum',
@@ -21,34 +21,28 @@ export default defineConfig({
         lang: 'es',
         icons: [
           {
-            src: 'icon-192.svg',
+            src: 'icon-192.png',
             sizes: '192x192',
-            type: 'image/svg+xml',
-            purpose: 'any maskable',
+            type: 'image/png',
+            purpose: 'any',
           },
           {
-            src: 'icon-512.svg',
+            src: 'icon-512.png',
             sizes: '512x512',
-            type: 'image/svg+xml',
-            purpose: 'any maskable',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
         shortcuts: [
-          {
-            name: 'Números de hoy',
-            url: '/',
-            description: 'Ver números de la suerte del día',
-          },
-          {
-            name: 'Interpretar sueño',
-            url: '/suenos',
-            description: 'Descifrar números de tu sueño',
-          },
-          {
-            name: 'Sorteos',
-            url: '/sorteos',
-            description: 'Horarios de loterías',
-          },
+          { name: 'Números de hoy', url: '/', description: 'Ver números del día' },
+          { name: 'Interpretar sueño', url: '/suenos', description: 'Descifrar tu sueño' },
+          { name: 'Sorteos', url: '/sorteos', description: 'Horarios de loterías' },
         ],
         categories: ['entertainment', 'lifestyle'],
       },
@@ -60,7 +54,7 @@ export default defineConfig({
             handler: 'NetworkFirst',
             options: {
               cacheName: 'lottery-cache',
-              expiration: { maxAgeSeconds: 60 * 60 }, // 1 hora
+              expiration: { maxAgeSeconds: 3600 },
             },
           },
         ],
@@ -70,10 +64,7 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-      },
+      '/api': { target: 'http://localhost:3001', changeOrigin: true },
     },
   },
 });
