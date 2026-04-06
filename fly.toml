@@ -1,31 +1,23 @@
-# Configuración de Fly.io
-app = "aurum-numeros"
-primary_region = "mia"
+# fly.toml app configuration file generated for app-shy-dust-7250 on 2026-04-06T17:04:33Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'app-shy-dust-7250'
+primary_region = 'iad'
 
 [build]
 
-[env]
-  NODE_ENV = "production"
-  PORT = "3001"
-
 [http_service]
-  internal_port = 3001
+  internal_port = 8080
   force_https = true
-  # IMPORTANTE: siempre encendido para usuarios reales
-  auto_stop_machines = false
+  auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 1
-
-  [http_service.concurrency]
-    type = "connections"
-    hard_limit = 100
-    soft_limit = 80
-
-# Volumen persistente: aquí vive la base de datos SQLite
-[[mounts]]
-  source = "aurum_data"
-  destination = "/data"
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-  size = "shared-cpu-1x"
-  memory = "256mb"
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256
