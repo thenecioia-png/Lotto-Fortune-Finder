@@ -56,7 +56,7 @@ export default function Admin() {
   if (loading || !user?.isAdmin) return null;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-12">
       <div className="flex items-center gap-3 mb-10">
         <Shield className="w-8 h-8 text-gold-400" />
         <div>
@@ -67,7 +67,7 @@ export default function Admin() {
 
       {/* Stats */}
       {stats && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10">
           <StatCard icon={Users} label="Total Usuarios" value={stats.totalUsers} />
           <StatCard icon={Crown} label="Suscripciones" value={stats.activeSubscriptions} sub="activas" />
           <StatCard icon={TrendingUp} label="Ingresos/Mes" value={`$${stats.monthlyRevenue}`} />
