@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="36" fill="#0a0a0a"/>
+  <circle cx="96" cy="96" r="70" fill="none" stroke="#9a6510" stroke-width="3" opacity="0.4"/>
+  <circle cx="96" cy="96" r="55" fill="none" stroke="#9a6510" stroke-width="1" opacity="0.2"/>
+  <!-- Estrella de 8 puntas dorada -->
+  <polygon points="96,30 103,70 130,50 110,80 150,80 118,96 150,112 110,112 130,142 103,122 96,162 89,122 62,142 82,112 42,112 74,96 42,80 82,80 62,50 89,70" fill="#9a6510" opacity="0.9"/>
+  <!-- A central -->
+  <text x="96" y="108" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#f0e0a0" letter-spacing="-2">A</text>
+</svg>
