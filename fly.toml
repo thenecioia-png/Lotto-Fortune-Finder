@@ -1,6 +1,6 @@
 # Configuración de Fly.io
 app = "app-shy-dust-7250"
-primary_region = "mia"
+primary_region = "dfw"
 
 [build]
 
@@ -11,7 +11,6 @@ primary_region = "mia"
 [http_service]
   internal_port = 3001
   force_https = true
-  # IMPORTANTE: siempre encendido para usuarios reales
   auto_stop_machines = false
   auto_start_machines = true
   min_machines_running = 1
