@@ -9,7 +9,7 @@
 
   body {
     background-color: #0a0a0a;
-    color: #e8d5a3;
+    color: #c9b87a;
     font-family: 'Raleway', sans-serif;
     min-height: 100vh;
     margin: 0;
@@ -26,32 +26,32 @@
     background: #0a0a0a;
   }
   ::-webkit-scrollbar-thumb {
-    background: #daa520;
+    background: #9a7510;
     border-radius: 3px;
   }
 }
 
 @layer components {
   .gold-text {
-    background: linear-gradient(135deg, #b8860b, #ffd700, #daa520);
+    background: linear-gradient(135deg, #8a6008, #b8920e, #a07010);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gold-border {
-    border: 1px solid rgba(218, 165, 32, 0.4);
+    border: 1px solid rgba(160, 112, 16, 0.4);
   }
 
   .card-dark {
     background: linear-gradient(145deg, rgba(26,16,4,0.9), rgba(10,8,2,0.95));
-    border: 1px solid rgba(218, 165, 32, 0.25);
+    border: 1px solid rgba(160, 112, 16, 0.25);
     backdrop-filter: blur(10px);
   }
 
   .btn-gold {
-    background: linear-gradient(135deg, #b8860b, #daa520, #f0c040);
-    color: #0a0a0a;
+    background: linear-gradient(135deg, #7a5208, #a07010, #b8860b);
+    color: #f0e0a0;
     font-weight: 700;
     font-family: 'Cinzel', serif;
     letter-spacing: 0.05em;
@@ -60,64 +60,64 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(218, 165, 32, 0.3);
+    box-shadow: 0 4px 20px rgba(160, 112, 16, 0.25);
   }
 
   .btn-gold:hover {
-    box-shadow: 0 6px 30px rgba(218, 165, 32, 0.5);
+    box-shadow: 0 6px 30px rgba(160, 112, 16, 0.4);
     transform: translateY(-1px);
   }
 
   .btn-outline-gold {
     background: transparent;
-    color: #daa520;
+    color: #a07010;
     font-weight: 600;
     font-family: 'Cinzel', serif;
     padding: 0.625rem 1.5rem;
     border-radius: 0.375rem;
-    border: 1px solid rgba(218, 165, 32, 0.5);
+    border: 1px solid rgba(160, 112, 16, 0.5);
     cursor: pointer;
     transition: all 0.3s ease;
   }
 
   .btn-outline-gold:hover {
-    background: rgba(218, 165, 32, 0.1);
-    border-color: #daa520;
+    background: rgba(160, 112, 16, 0.1);
+    border-color: #a07010;
   }
 
   .number-ball {
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
-    background: linear-gradient(145deg, #b8860b, #ffd700);
-    color: #0a0a0a;
+    background: linear-gradient(145deg, #7a5208, #b8860b);
+    color: #f0e0a0;
     font-family: 'Cinzel', serif;
     font-weight: 700;
     font-size: 1.125rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 4px 15px rgba(160, 112, 16, 0.35), inset 0 1px 0 rgba(255,255,255,0.1);
   }
 
   .lottery-card {
     background: linear-gradient(145deg, rgba(26,16,4,0.95), rgba(15,10,2,0.98));
-    border: 1px solid rgba(218, 165, 32, 0.3);
+    border: 1px solid rgba(160, 112, 16, 0.3);
     border-radius: 1rem;
     padding: 1.5rem;
     transition: all 0.3s ease;
   }
 
   .lottery-card:hover {
-    border-color: rgba(218, 165, 32, 0.6);
-    box-shadow: 0 8px 32px rgba(218, 165, 32, 0.15);
+    border-color: rgba(160, 112, 16, 0.5);
+    box-shadow: 0 8px 32px rgba(160, 112, 16, 0.12);
     transform: translateY(-2px);
   }
 
   .input-dark {
     background: rgba(26,16,4,0.8);
-    border: 1px solid rgba(218, 165, 32, 0.3);
-    color: #e8d5a3;
+    border: 1px solid rgba(160, 112, 16, 0.3);
+    color: #c9b87a;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
     width: 100%;
@@ -127,26 +127,26 @@
   }
 
   .input-dark:focus {
-    border-color: #daa520;
-    box-shadow: 0 0 0 2px rgba(218, 165, 32, 0.15);
+    border-color: #a07010;
+    box-shadow: 0 0 0 2px rgba(160, 112, 16, 0.15);
   }
 
   .input-dark::placeholder {
-    color: rgba(232, 213, 163, 0.4);
+    color: rgba(180, 150, 80, 0.35);
   }
 
   .stars-bg {
     background-image:
-      radial-gradient(ellipse at 20% 50%, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(184, 134, 11, 0.05) 0%, transparent 40%);
+      radial-gradient(ellipse at 20% 50%, rgba(160, 112, 16, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(130, 90, 10, 0.04) 0%, transparent 40%);
   }
 }
 
 @layer utilities {
   .text-shadow-gold {
-    text-shadow: 0 0 30px rgba(218, 165, 32, 0.5);
+    text-shadow: 0 0 30px rgba(160, 112, 16, 0.4);
   }
   .divider-gold {
-    border-color: rgba(218, 165, 32, 0.2);
+    border-color: rgba(160, 112, 16, 0.2);
   }
 }

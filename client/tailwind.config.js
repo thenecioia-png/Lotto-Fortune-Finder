@@ -5,16 +5,16 @@ export default {
     extend: {
       colors: {
         gold: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
+          50:  '#2a1a04',
+          100: '#3a2408',
+          200: '#4e3010',
+          300: '#6b4010',
+          400: '#855010',
+          500: '#9a6510',
+          600: '#a07010',
+          700: '#b8860b',
+          800: '#7a5208',
+          900: '#5a3a06',
         },
         dark: {
           50: '#1a1a1a',
@@ -28,7 +28,7 @@ export default {
         serif: ['Georgia', 'Cambria', '"Times New Roman"', 'serif'],
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #b8860b 0%, #daa520 50%, #ffd700 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #7a5208 0%, #a07010 50%, #b8860b 100%)',
         'dark-gradient': 'linear-gradient(180deg, #0a0a0a 0%, #1a1008 100%)',
       },
       animation: {
@@ -46,8 +46,8 @@ export default {
           '50%': { transform: 'translateY(-8px)' },
         },
         'pulse-gold': {
-          '0%, 100%': { boxShadow: '0 0 15px rgba(218,165,32,0.3)' },
-          '50%': { boxShadow: '0 0 30px rgba(218,165,32,0.6)' },
+          '0%, 100%': { boxShadow: '0 0 15px rgba(160,112,16,0.2)' },
+          '50%': { boxShadow: '0 0 25px rgba(160,112,16,0.4)' },
         },
       },
     },
