@@ -1,5 +1,5 @@
 # Configuración de Fly.io
-app = "aurum-numeros"
+app = "app-shy-dust-7250"
 primary_region = "mia"
 
 [build]
