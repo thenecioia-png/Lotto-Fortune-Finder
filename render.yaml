@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: aurum-numeros
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npx tsx server/src/index.ts
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production

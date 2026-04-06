@@ -23,6 +23,9 @@ declare module 'express-session' {
   }
 }
 
+// Render (y cualquier hosting) pone un proxy delante — necesario para HTTPS y sesiones
+app.set('trust proxy', 1);
+
 app.use(express.json());
 
 app.use(session({
@@ -30,9 +33,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   },
 }));
 
@@ -48,13 +52,21 @@ app.get('/api/health', (_req, res) => {
 });
 
 // Servir el frontend React (carpeta dist del cliente)
-const clientDist = join(__dirname, '../../client/dist');
+// Funciona tanto corriendo desde server/src/ como desde la raíz del monorepo
+const possibleDist = [
+  join(__dirname, '../../client/dist'),   // tsx server/src/index.ts (desde raíz)
+  join(__dirname, '../client/dist'),       // por si acaso
+  join(process.cwd(), 'client/dist'),     // desde cualquier directorio de trabajo
+];
+const clientDist = possibleDist.find(existsSync) || possibleDist[0];
+
 if (existsSync(clientDist)) {
   app.use(express.static(clientDist));
-  // Todas las rutas que no sean /api devuelven el index.html (SPA)
   app.get('*', (_req, res) => {
     res.sendFile(join(clientDist, 'index.html'));
   });
+} else {
+  console.warn('⚠️  No se encontró client/dist — ejecuta npm run build primero');
 }
 
 app.listen(PORT, () => {

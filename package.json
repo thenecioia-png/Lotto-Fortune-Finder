@@ -2,11 +2,14 @@
   "name": "aurum-numeros",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "workspaces": ["server", "client"],
   "scripts": {
     "dev": "concurrently -k -n SERVER,CLIENT -c cyan,magenta \"npm run dev --workspace server\" \"npm run dev --workspace client\"",
     "build": "npm run build --workspace client",
-    "start": "npm run build && npm run dev --workspace server"
+    "start": "tsx server/src/index.ts"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
