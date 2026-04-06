@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Menu, X, Sparkles, LogOut, User, Shield } from 'lucide-react';
 import AuthModal from './AuthModal';
-import InstallButton from './InstallButton';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -55,7 +54,6 @@ export default function Navbar() {
 
             {/* Auth */}
             <div className="hidden md:flex items-center gap-3">
-              <InstallButton />
               {user ? (
                 <div className="flex items-center gap-3">
                   {user.isAdmin && (
@@ -93,7 +91,6 @@ export default function Navbar() {
           {/* Mobile Menu */}
           {menuOpen && (
             <div className="md:hidden border-t border-gold-700/20 py-3 space-y-1">
-              <div className="px-4 pb-2"><InstallButton /></div>
               {links.map(link => (
                 <Link
                   key={link.to}

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import InstallBanner from './components/InstallBanner';
 import Home from './pages/Home';
 import Schedule from './pages/Schedule';
 import Dreams from './pages/Dreams';
@@ -24,6 +25,7 @@ export default function App() {
               <Route path="/admin" element={<Admin />} />
             </Routes>
           </main>
+          <InstallBanner />
         </div>
       </AuthProvider>
     </BrowserRouter>

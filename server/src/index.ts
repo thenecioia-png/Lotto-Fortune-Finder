@@ -9,6 +9,7 @@ import { lotteryRouter } from './routes/lottery.js';
 import { dreamsRouter } from './routes/dreams.js';
 import { adminRouter } from './routes/admin.js';
 import { chatRouter } from './routes/chat.js';
+import { scraperRouter, iniciarCron } from './routes/scraper.js';
 import './db.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -46,6 +47,7 @@ app.use('/api/lottery', lotteryRouter);
 app.use('/api/dreams', dreamsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/chat', chatRouter);
+app.use('/api', scraperRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
@@ -71,4 +73,5 @@ if (existsSync(clientDist)) {
 
 app.listen(PORT, () => {
   console.log(`\n✨ Aurum Números corriendo en http://localhost:${PORT}\n`);
+  iniciarCron();
 });

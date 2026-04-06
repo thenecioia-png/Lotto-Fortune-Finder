@@ -3,21 +3,36 @@
 @tailwind utilities;
 
 @layer base {
-  * { box-sizing: border-box; }
+  /* Evita el zoom-out por desbordamiento horizontal */
+  html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  * {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
 
   body {
+    overflow-x: hidden;
     background-color: #0d0d0d;
     color: #d4b870;
     font-family: 'Raleway', sans-serif;
+    font-size: 16px;
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
   }
 
   h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
 
-  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: #0d0d0d; }
   ::-webkit-scrollbar-thumb { background: #c4920a; border-radius: 3px; }
+
+  /* Previene que imágenes o elementos hijos desborden */
+  img, svg, video { max-width: 100%; }
 }
 
 @layer components {
@@ -26,10 +41,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-  }
-
-  .gold-border {
-    border: 1px solid rgba(196, 146, 10, 0.4);
   }
 
   .card-dark {
@@ -44,17 +55,21 @@
     font-weight: 700;
     font-family: 'Cinzel', serif;
     letter-spacing: 0.05em;
-    padding: 0.625rem 1.5rem;
-    border-radius: 0.375rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(196, 146, 10, 0.28);
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
   }
 
   .btn-gold:hover {
     box-shadow: 0 6px 30px rgba(196, 146, 10, 0.45);
-    transform: translateY(-1px);
     filter: brightness(1.1);
   }
 
@@ -63,11 +78,16 @@
     color: #c4920a;
     font-weight: 600;
     font-family: 'Cinzel', serif;
-    padding: 0.625rem 1.5rem;
-    border-radius: 0.375rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
     border: 1px solid rgba(196, 146, 10, 0.5);
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
   }
 
   .btn-outline-gold:hover {
@@ -75,43 +95,58 @@
     border-color: #c4920a;
   }
 
+  /* Bola de número — tamaño responsivo */
   .number-ball {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     background: linear-gradient(145deg, #8a6010, #c4920a, #d4a820);
     color: #0d0d0d;
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    font-size: 1.125rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(196, 146, 10, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(196, 146, 10, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+
+  @media (min-width: 640px) {
+    .number-ball {
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.1rem;
+    }
   }
 
   .lottery-card {
     background: linear-gradient(145deg, rgba(26,18,4,0.95), rgba(15,11,2,0.98));
     border: 1px solid rgba(196, 146, 10, 0.3);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: 0.875rem;
+    padding: 1rem;
     transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .lottery-card { padding: 1.5rem; }
   }
 
   .lottery-card:hover {
     border-color: rgba(196, 146, 10, 0.55);
-    box-shadow: 0 8px 32px rgba(196, 146, 10, 0.14);
-    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(196, 146, 10, 0.12);
   }
 
   .input-dark {
     background: rgba(26,18,4,0.8);
     border: 1px solid rgba(196, 146, 10, 0.32);
     color: #d4b870;
-    padding: 0.75rem 1rem;
+    padding: 0.875rem 1rem;
     border-radius: 0.5rem;
     width: 100%;
     font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
     transition: border-color 0.2s;
     outline: none;
   }
@@ -125,18 +160,17 @@
 
   .stars-bg {
     background-image:
-      radial-gradient(ellipse at 20% 50%, rgba(196,146,10,0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(160,120,10,0.05) 0%, transparent 40%);
+      radial-gradient(ellipse at 20% 50%, rgba(196,146,10,0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(160,120,10,0.04) 0%, transparent 40%);
   }
 }
 
 @layer utilities {
   .text-shadow-gold { text-shadow: 0 0 30px rgba(196,146,10,0.45); }
-  .divider-gold { border-color: rgba(196,146,10,0.22); }
 }
 
 @keyframes slide-up {
-  from { transform: translateY(100%); opacity: 0; }
+  from { transform: translateY(110%); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
 }
-.animate-slide-up { animation: slide-up 0.3s ease-out; }
+.animate-slide-up { animation: slide-up 0.35s ease-out; }

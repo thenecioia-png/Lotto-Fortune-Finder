@@ -55,6 +55,15 @@ db.exec(`
     created_at TEXT DEFAULT (datetime('now')),
     FOREIGN KEY (conversation_id) REFERENCES conversations(id)
   );
+
+  CREATE TABLE IF NOT EXISTS resultados_loteria (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    loteria TEXT NOT NULL,
+    sorteo TEXT NOT NULL,
+    numeros TEXT NOT NULL,
+    fecha TEXT NOT NULL,
+    creado_en TEXT DEFAULT (datetime('now'))
+  );
 `);
 
 // Crear admin por defecto si no existe
