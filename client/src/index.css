@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 @layer base {
-  /* Evita el zoom-out por desbordamiento horizontal */
   html {
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
+    /* Forzar que el navegador nunca haga zoom-out */
+    width: 100%;
   }
 
   * {
     box-sizing: border-box;
-    max-width: 100%;
   }
+
+  /* Prevenir que cualquier elemento desborde el ancho */
+  img, svg, video, table { max-width: 100%; }
 
   body {
     overflow-x: hidden;
@@ -20,9 +23,11 @@
     color: #d4b870;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
+    line-height: 1.5;
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
+    width: 100%;
   }
 
   h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
@@ -30,25 +35,25 @@
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: #0d0d0d; }
   ::-webkit-scrollbar-thumb { background: #c4920a; border-radius: 3px; }
-
-  /* Previene que imágenes o elementos hijos desborden */
-  img, svg, video { max-width: 100%; }
 }
 
 @layer components {
+  /* ── Texto dorado degradado ── */
   .gold-text {
-    background: linear-gradient(135deg, #a07820, #d4a010, #c09020);
+    background: linear-gradient(135deg, #c09030, #e8b820, #d4a020);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  /* ── Cards ── */
   .card-dark {
-    background: linear-gradient(145deg, rgba(26,18,4,0.92), rgba(12,10,2,0.96));
-    border: 1px solid rgba(196, 146, 10, 0.28);
+    background: linear-gradient(145deg, rgba(30,20,5,0.95), rgba(15,11,2,0.98));
+    border: 1px solid rgba(196, 146, 10, 0.45);
     backdrop-filter: blur(10px);
   }
 
+  /* ── Botón dorado principal — mínimo 44px altura táctil ── */
   .btn-gold {
     background: linear-gradient(135deg, #8a6010, #c4920a, #d4a820);
     color: #0d0d0d;
@@ -56,31 +61,38 @@
     font-family: 'Cinzel', serif;
     letter-spacing: 0.05em;
     padding: 0.75rem 1.5rem;
+    min-height: 44px;
     border-radius: 0.5rem;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(196, 146, 10, 0.28);
+    box-shadow: 0 4px 20px rgba(196, 146, 10, 0.35);
     font-size: 0.9rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
 
   .btn-gold:hover {
-    box-shadow: 0 6px 30px rgba(196, 146, 10, 0.45);
-    filter: brightness(1.1);
+    box-shadow: 0 6px 30px rgba(196, 146, 10, 0.55);
+    filter: brightness(1.12);
   }
 
+  .btn-gold:active { transform: scale(0.97); }
+
+  /* ── Botón contorno dorado — mínimo 44px ── */
   .btn-outline-gold {
     background: transparent;
-    color: #c4920a;
+    color: #d4a020;
     font-weight: 600;
     font-family: 'Cinzel', serif;
     padding: 0.75rem 1.5rem;
+    min-height: 44px;
     border-radius: 0.5rem;
-    border: 1px solid rgba(196, 146, 10, 0.5);
+    border: 1px solid rgba(196, 146, 10, 0.65);
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9rem;
@@ -88,14 +100,15 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .btn-outline-gold:hover {
-    background: rgba(196, 146, 10, 0.12);
+    background: rgba(196, 146, 10, 0.15);
     border-color: #c4920a;
   }
 
-  /* Bola de número — tamaño responsivo */
+  /* ── Bola de número ── */
   .number-ball {
     width: 3rem;
     height: 3rem;
@@ -109,7 +122,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 3px 12px rgba(196, 146, 10, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: 0 3px 14px rgba(196, 146, 10, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
   }
 
   @media (min-width: 640px) {
@@ -120,9 +133,10 @@
     }
   }
 
+  /* ── Card de lotería ── */
   .lottery-card {
-    background: linear-gradient(145deg, rgba(26,18,4,0.95), rgba(15,11,2,0.98));
-    border: 1px solid rgba(196, 146, 10, 0.3);
+    background: linear-gradient(145deg, rgba(30,20,5,0.96), rgba(18,12,2,0.99));
+    border: 1px solid rgba(196, 146, 10, 0.45);
     border-radius: 0.875rem;
     padding: 1rem;
     transition: all 0.3s ease;
@@ -134,15 +148,17 @@
   }
 
   .lottery-card:hover {
-    border-color: rgba(196, 146, 10, 0.55);
-    box-shadow: 0 6px 24px rgba(196, 146, 10, 0.12);
+    border-color: rgba(196, 146, 10, 0.7);
+    box-shadow: 0 6px 28px rgba(196, 146, 10, 0.18);
   }
 
+  /* ── Input oscuro ── */
   .input-dark {
-    background: rgba(26,18,4,0.8);
-    border: 1px solid rgba(196, 146, 10, 0.32);
-    color: #d4b870;
+    background: rgba(26,18,4,0.85);
+    border: 1px solid rgba(196, 146, 10, 0.5);
+    color: #e8cc78;
     padding: 0.875rem 1rem;
+    min-height: 44px;
     border-radius: 0.5rem;
     width: 100%;
     font-family: 'Raleway', sans-serif;
@@ -153,24 +169,68 @@
 
   .input-dark:focus {
     border-color: #c4920a;
-    box-shadow: 0 0 0 2px rgba(196, 146, 10, 0.18);
+    box-shadow: 0 0 0 3px rgba(196, 146, 10, 0.22);
   }
 
-  .input-dark::placeholder { color: rgba(196, 146, 10, 0.35); }
+  .input-dark::placeholder { color: rgba(196, 146, 10, 0.45); }
 
+  /* ── Fondo estrellado ── */
   .stars-bg {
     background-image:
-      radial-gradient(ellipse at 20% 50%, rgba(196,146,10,0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(160,120,10,0.04) 0%, transparent 40%);
+      radial-gradient(ellipse at 20% 50%, rgba(196,146,10,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(160,120,10,0.05) 0%, transparent 40%);
   }
 }
 
 @layer utilities {
-  .text-shadow-gold { text-shadow: 0 0 30px rgba(196,146,10,0.45); }
+  .text-shadow-gold { text-shadow: 0 0 30px rgba(196,146,10,0.5); }
 }
 
+/* ── Animaciones ── */
 @keyframes slide-up {
   from { transform: translateY(110%); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
 }
 .animate-slide-up { animation: slide-up 0.35s ease-out; }
+
+/* ════════════════════════════════════════════════════════════════
+   OVERRIDES DE CONTRASTE — sin @layer para tener máxima prioridad
+   Los estilos fuera de @layer siempre ganan sobre estilos en @layer
+   ════════════════════════════════════════════════════════════════ */
+
+/* Textos dorados muy tenues → más visibles */
+.text-gold-200\/25 { color: rgb(232 204 120 / 0.7) !important; }
+.text-gold-200\/40 { color: rgb(232 204 120 / 0.82) !important; }
+.text-gold-200\/50 { color: rgb(232 204 120 / 0.88) !important; }
+.text-gold-200\/60 { color: rgb(232 204 120 / 0.9) !important; }
+.text-gold-200\/70 { color: rgb(232 204 120 / 0.92) !important; }
+
+.text-gold-300 { color: #e8cc78 !important; }
+
+.text-gold-400\/30 { color: rgb(196 146 10 / 0.75) !important; }
+.text-gold-400\/50 { color: rgb(196 146 10 / 0.88) !important; }
+.text-gold-400\/60 { color: rgb(196 146 10 / 0.92) !important; }
+.text-gold-400\/70 { color: rgb(196 146 10 / 0.95) !important; }
+
+/* gold-600 es muy oscuro (#956408) — lo reemplazamos por gold-400 más legible */
+.text-gold-600\/40 { color: rgb(196 146 10 / 0.75) !important; }
+.text-gold-600\/50 { color: rgb(196 146 10 / 0.82) !important; }
+.text-gold-600\/60 { color: rgb(196 146 10 / 0.88) !important; }
+.text-gold-600\/70 { color: rgb(196 146 10 / 0.9) !important; }
+.text-gold-500\/60 { color: rgb(196 146 10 / 0.85) !important; }
+.text-gold-600    { color: rgb(196 146 10 / 0.85) !important; }
+
+/* Bordes tenues → más visibles */
+.border-gold-400\/15 { border-color: rgba(196, 146, 10, 0.35) !important; }
+.border-gold-400\/20 { border-color: rgba(196, 146, 10, 0.4) !important; }
+.border-gold-400\/25 { border-color: rgba(196, 146, 10, 0.45) !important; }
+.border-gold-700\/10 { border-color: rgba(122, 80, 8, 0.35) !important; }
+.border-gold-700\/20 { border-color: rgba(122, 80, 8, 0.45) !important; }
+.border-gold-700\/30 { border-color: rgba(122, 80, 8, 0.5) !important; }
+
+/* Fondos de hover/activo → un poco más visibles */
+.bg-gold-400\/10 { background-color: rgba(196, 146, 10, 0.14) !important; }
+.bg-gold-400\/15 { background-color: rgba(196, 146, 10, 0.18) !important; }
+.bg-gold-900\/10 { background-color: rgba(66, 42, 4, 0.3) !important; }
+.bg-gold-900\/20 { background-color: rgba(66, 42, 4, 0.35) !important; }
+.bg-gold-900\/30 { background-color: rgba(66, 42, 4, 0.42) !important; }
