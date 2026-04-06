@@ -1,0 +1,31 @@
+# Configuración de Fly.io
+app = "aurum-numeros"
+primary_region = "mia"
+
+[build]
+
+[env]
+  NODE_ENV = "production"
+  PORT = "3001"
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  # IMPORTANTE: siempre encendido para usuarios reales
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "connections"
+    hard_limit = 100
+    soft_limit = 80
+
+# Volumen persistente: aquí vive la base de datos SQLite
+[[mounts]]
+  source = "aurum_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

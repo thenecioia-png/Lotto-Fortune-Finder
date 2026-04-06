@@ -5,7 +5,12 @@ import { fileURLToPath } from 'url';
 import bcrypt from 'bcryptjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DB_PATH = join(__dirname, '../../aurum.db');
+
+// En producción (Fly.io) la BD vive en el volumen persistente /data
+// Localmente vive junto al proyecto
+const DB_PATH = process.env.NODE_ENV === 'production'
+  ? '/data/aurum.db'
+  : join(__dirname, '../../aurum.db');
 
 export const db = new DatabaseSync(DB_PATH);
 
